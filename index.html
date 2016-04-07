@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es" ng-app="n3App">
+    <head>
+        <base href="/">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.js"></script>
+        <script src="/app.js" ng-module="n3App"></script>
+        <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+        <script type="text/javascript">
+            tinymce.init({
+                selector: "textarea",
+                plugins: [
+                    "advlist autolink lists link image charmap print preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table contextmenu paste"
+                ],
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            });
+        </script>
+        <title>Ñ3 - {{title}}</title>
+        <link href="/css/base.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div id="container">
+            <header>
+                <div class="logo">Ñ3</div>
+                <div class="login">
+                    {% if username == None %}
+                        <a href="/login">Login</a>
+                    {% else %}
+                        {{username}} - <a href="/logout">Logout</a>
+                    {% endif %}
+                </div>
+                <div class="content_menu">
+                    {% for x in ['news', 'about'] %}
+                        {% if x == section %}
+                            <a href="/{{x}}" style="color: #999">{{x}}</a>
+                        {% else %}
+                            <a href="/{{x}}">{{x}}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </header>
+            <div id="right_column">
+            </div>
+            <div class="body" ng-view></div>
+            <footer>
+                By <a href="https://github.com/kianxineki/n3">n3</a>
+            </footer>
+        </div>
+    </body>
+<html>
