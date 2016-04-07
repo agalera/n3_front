@@ -1,24 +1,22 @@
 <h1>News</h1>
 <div class="content_posts">
-    {% for value in values['kwargs']['news']['result'] %}
-        <div class="content_post">
-            <h1>{{value['title']}}</h1>
-            {{value['texto']}}
-            <h4>by: {{value['user']['name']}} ,
-                <a href="/comments/{{value['_id']}}">
-                    {{value['comments']|length}} comments
-                </a>
-            </h4>
-            <h4>
-            tags:
-                {% for valu in value['tags'] %}
-                    <a href="/search/page/0/tags/{{valu}}">{{valu}}</a>&nbsp;
-                {% endfor %}
-            </h4>
-        </div>
-    {% endfor %}
+    <div class="content_post" ng-repeat='v in data.news.result'>
+        <h1><a href="/comments/{{v['_id']}}">{{ v.title }}</a></h1>
+        <div ng-bind-html="v.texto"></div>
+        <h4>by: {{ v.user.name }},
+            <a href="/comments/{{v['_id']}}">
+                {{ v.comments }} comments
+            </a>
+        </h4>
+        <h4>
+        tags:
+            <div class="tags" >
+                <a ng-repeat='tag in v.tags' href="/search/page/0/tags/{{ tag }}">{{ tag }}</a>&nbsp;
+            </div>
+        </h4>
+    </div>
 </div>
-
+<!--
 {% if values['kwargs']['search'] == True %}
     {% if values['kwargs']['news']['page'] != 0 %}
         <a href="/search/page/{{values['kwargs']['news']['page']|int - 1}}/tags/{{values['kwargs']['tags']}}"><</a>
@@ -34,3 +32,4 @@
         <a href="/other_news/{{values['kwargs']['news']['page']|int + 1}}">></a>
     {% endif %}
 {% endif %}
+-->
