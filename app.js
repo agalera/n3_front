@@ -55,6 +55,7 @@ angular.module('n3App', ['ngRoute', 'ngSanitize', 'ngCookies'])
       success(function (data, status, headers, config) {
         data.texto = $sce.trustAsHtml(data.texto);
         data._id = $sce.trustAsUrl(data._id);
+        document.comment.action='/api/new_comment/'+data._id;
         $scope.data = data;
       });
   })

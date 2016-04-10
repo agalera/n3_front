@@ -20,9 +20,8 @@
 </div>
 <div class="content_posts">
     Add comment:<br />
-    {{data._id}}
     <div ng-if="user != undefined">
-        <form action="/api/new_comment/{{ data.title }}" method="post">
+        <form action="/" method="post" name="comment">
             <textarea rows="5" cols="50" name="texto"></textarea>
             <input type="submit" value="Submit" />
         </form>
